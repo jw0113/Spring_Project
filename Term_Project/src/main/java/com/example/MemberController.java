@@ -87,7 +87,6 @@ public class MemberController {
 	//회원 정보 삭제하기
 	@PostMapping("/memberdelete")
 	public String memberDelete(@RequestBody String id, HttpSession session) {
-		System.out.println("delet에 잘 들어왔는지: " + id);
 		int re = service.memberDelete(id);
 		if(re == 0) {
 			return "deleteFail";
