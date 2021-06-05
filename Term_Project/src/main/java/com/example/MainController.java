@@ -31,10 +31,19 @@ public class MainController {
 	
 	//회원정보요청
 	@GetMapping("/memberInfo/memberlist")
-	public String memberlist(Model model, @RequestParam(value="id", required=false) String id) throws JsonProcessingException {
+	public String memberlist(Model model, @RequestParam(value="id", required=false) String id) {
 		List<MemberVO> vo = service.selectOne(id);
 		System.out.println(vo);
 		model.addAttribute("member",vo);	
 		return "memberInfo/memberlist";
+	}
+	
+	//회원정보수정 요청
+	@GetMapping("/memberInfo/memberupdate")
+	public String memberupdate(Model model, @RequestParam(value="id", required=false) String id) {
+		List<MemberVO> vo = service.selectOne(id);
+		System.out.println(vo);
+		model.addAttribute("member",vo);	
+		return "memberInfo/memberupdate";
 	}
 }

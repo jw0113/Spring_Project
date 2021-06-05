@@ -297,11 +297,11 @@ $(function() {
 			//이름 정보
 			const name = $("#user_name").val();
 			//주소 정보
-			const address = $("user_address").val();
+			const address = $("#user_address").val();
 			//이메일 정보
-			const email = $("user_email").val();
+			const email = $("#user_email").val();
 			//전화번호 정보
-			const phone = $("user_phone").val();
+			const phone = $("#user_phone").val();
 			
 			const member = {
 					id : id,

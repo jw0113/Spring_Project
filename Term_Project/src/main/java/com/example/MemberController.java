@@ -47,4 +47,52 @@ public class MemberController {
 		service.insertMember(member);
 		return "joinSuccess";
 	}
+	
+	//회원정보 수정 요청 처리
+	@PostMapping("/memberInfo/memberupdate")
+	public String memberupdate(@RequestBody MemberVO member) {
+		System.out.println("update : " + member);
+		int re = service.updateMember(member);
+		if(re==0) {
+			return "updateFail";
+		}
+		return "updateSuccess";
+	}
+	
+	//현재 비밀번호 확인
+	@PostMapping("/checkPw")
+	public String checkPw(@RequestBody MemberVO member) {
+		System.out.println("checkPw : " + member);
+		String pw = service.checkPw(member);
+		if(member.getPw().equals(pw)) {
+			System.out.println("비밀번호가 일치함");
+			return "OK";
+		} else {
+			System.out.println("비밀번호 불일치");
+			return "NO";
+		}	
+	}
+	
+	//비밀번호 변경 요청 처리
+	@PostMapping("/changePw")
+	public String changePw(@RequestBody MemberVO member) {
+		System.out.println("changePw : " + member);
+		int re = service.changePw(member);
+		if(re==0) {
+			return "updateFail";
+		}
+		return "updateSuccess";
+	}
+	
+	//회원 정보 삭제하기
+	@PostMapping("/memberdelete")
+	public String memberDelete(@RequestBody String id, HttpSession session) {
+		System.out.println("delet에 잘 들어왔는지: " + id);
+		int re = service.memberDelete(id);
+		if(re == 0) {
+			return "deleteFail";
+		}
+		session.invalidate();
+		return "deleteSuccess";
+	}
 }

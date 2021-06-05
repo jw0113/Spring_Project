@@ -106,10 +106,10 @@
 				<c:forEach var="member" items="${member}" varStatus="status">
 					<table
 						style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
-
 						<tr>
 							<td style="text-align: left">
 								<p><strong>이름</strong>&nbsp;&nbsp;&nbsp;<span id="nameChk"></span></p>
+								<input type="hidden" name="userId" id="user_id" value="${member.id}"></input>
 							</td>
 						</tr>
 						<tr>
@@ -183,27 +183,27 @@
 			</div>
 	</header>
 	<script>
+	
 		$(function() {
 
 			//사용자가 수정 버튼을 눌렀을 때 이벤트 처리
-			$("#signup-btn").click(function() {
-			
-				//아이디 정보
+			$("#signupdate-btn").click(function() {
+
+				//id 정보
 				const id = $("#user_id").val();
-				//패스워드 정보
-				const pw = $("#password").val();
+
 				//이름 정보
 				const name = $("#user_name").val();
 				//주소 정보
-				const address = $("user_address").val();
+				const address = $("#user_address").val();
 				//이메일 정보
-				const email = $("user_email").val();
+				const email = $("#user_email").val();
 				//전화번호 정보
-				const phone = $("user_phone").val();
+				const phone = $("#user_phone").val();
+
 			
 			const member = {
 					id : id,
-					pw : pw,
 					name : name,
 					address : address,
 					email : email,
@@ -214,7 +214,7 @@
 			//클라이언트에서 서버와 통신하는 ajax함수 (비동기 통신)
 			$.ajax({
 				type: "POST", //서버에 전송하는 HTTP 방식
-				url: "/Term_Project/regist", //서버 요청 URL
+				url: "/Term_Project/memberInfo/memberupdate", //서버 요청 URL
 				headers: {
 					"Content-Type" : "application/json"
 				}, //요청 헤더 정보
@@ -222,11 +222,11 @@
 				data: JSON.stringify(member), //서버로 전송할 데이터
 				success: function(result) { //서버와의 통신 성공 시 실행할 내용. 매개변수는 통신 성공 시 데이터가 저장될 곳.
 					console.log("통신 성공!: " + result);
-					if(result === "joinSuccess") {
-						alert("회원 가입에 성공했습니다!");
+					if(result === "updateSuccess") {
+						alert("회원 정보를 수정하였습니다!");
 						location.href="/Term_Project/";
 					} else {
-						alert("회원 가입 실패!");
+						alert("회원 정보 수정 실패!");
 					}
 				},
 				error: function() {
@@ -235,8 +235,8 @@
 				
 			}); //end ajax
 		
-	}); //signup-btn 이벤트 처리 끝.
-});
-</script>
+			}); //signupdate-btn 이벤트 처리 끝.
+	});
+	</script>
   </body>
 </html>

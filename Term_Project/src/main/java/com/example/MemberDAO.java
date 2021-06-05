@@ -70,4 +70,36 @@ public class MemberDAO {
 				});
 		return result;
 	}
+	
+	//member정보 수정
+	public int updateMember(MemberVO vo) {
+		int re = jdbcTemplate.update("update `member` set name=?, address=?, email=?, phone=? where id=?",vo.getName(),vo.getAddress(),vo.getEmail(),vo.getPhone(),vo.getId());
+		System.out.println("db 수정 성공 " + re);
+		return re;
+	}
+	
+	//현재 비밀번호 확인
+	public String checkPw(MemberVO vo) {
+		try {
+			String re = jdbcTemplate.queryForObject("select pw from `member` where id='"+vo.getId()+"'", String.class);
+			return re;
+		}catch(EmptyResultDataAccessException e){
+			return "null";
+		}
+	}
+	
+	//비밀번호 변경
+	public int changePw(MemberVO vo) {
+		int re = jdbcTemplate.update("update `member` set pw=? where id=?",vo.getPw(),vo.getId());
+		System.out.println("db 수정 성공 " + re);
+		return re;
+	}
+	
+	//회원 정보 삭제
+	public int memberDelete(String id) {
+		System.out.println("DAO 확인 : " + id);
+		int re = jdbcTemplate.update("delete from `member` where id='"+id+"'");
+		System.out.println("db 삭제 성공 " + re);
+		return re;
+	}
 }

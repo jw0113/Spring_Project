@@ -31,4 +31,24 @@ public class MemberService {
 	public List<MemberVO> selectOne(String id) {
 		return dao.selectOne(id);
 	}
+	
+	//member 정보 수정
+	public int updateMember(MemberVO member) {
+		return dao.updateMember(member);
+	}
+	
+	//비밀번호 확인
+	public String checkPw(MemberVO member) {
+		return dao.checkPw(member);
+	}
+	
+	//비밀번호 변경
+	public int changePw(MemberVO member) {
+		return dao.changePw(member);
+	}
+	
+	//회원 정보 삭제
+	public int memberDelete(String id) {
+		return dao.memberDelete(id);
+	}
 }

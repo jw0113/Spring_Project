@@ -129,10 +129,10 @@
             		<a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
             		<div class="dropdown-menu music-menu">
             			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
-            			<a class="dropdown-item music-tap" data-toggle="modal" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
+            			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
             			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">비밀번호 변경</a>
-            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">회원탈퇴</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
             		</div>
             	</li>
           		<li class="nav-item">
@@ -157,6 +157,7 @@
     </div>
   </header>
 <%@ include file="../login.jsp" %>
-<%@ include file="../regist.jsp" %>  
-
+<%@ include file="../regist.jsp" %> 
+<%@ include file="../memberInfo/memberpwchange.jsp" %>  
+<%@ include file="../memberInfo/memberdelete.jsp" %> 
 
