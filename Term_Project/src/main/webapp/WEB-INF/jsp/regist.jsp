@@ -76,7 +76,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><input type="address" name="userAddress" id="user_address"
+							<td><input type="text" name="userAddress" id="user_address"
 								class="form-control tooltipstered" 
 								required="required" aria-required="true"
 								style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
@@ -89,7 +89,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><input type="email" name="userEmail" id="user_email"
+							<td><input type="text" name="userEmail" id="user_email"
 								class="form-control tooltipstered" 
 								required="required" aria-required="true"
 								style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
@@ -102,7 +102,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td><input type="phone" name="userPhone" id="user_phone"
+							<td><input type="text" name="userPhone" id="user_phone"
 								class="form-control tooltipstered" 
 								required="required" aria-required="true"
 								style="margin-bottom: 25px; width: 100%; height: 40px; border: 1px solid #d9d9de"
@@ -155,7 +155,7 @@ $(function() {
 			//ajax 호출
 			$.ajax({
 				type: "POST",
-				url: "/user/checkId",
+				url: "/Term_Project/checkId",
 				headers: {
 					"Content-Type" : "application/json"
 				},
@@ -262,8 +262,8 @@ $(function() {
 			chk6 = false;
 		}
 		else {
-			$("#user_name").css("background-color", "aqua");
-			$("#nameChk").html('<b style="font-size:14px; color:green;">[이메일 작성 완료!]</b>');
+			$("#user_email").css("background-color", "aqua");
+			$("#emailChk").html('<b style="font-size:14px; color:green;">[이메일 작성 완료!]</b>');
 			chk6 = true;
 		}
 		
@@ -326,7 +326,7 @@ $(function() {
 					console.log("통신 성공!: " + result);
 					if(result === "joinSuccess") {
 						alert("회원 가입에 성공했습니다!");
-						location.href="/";
+						location.href="/Term_Project/";
 					} else {
 						alert("회원 가입 실패!");
 					}

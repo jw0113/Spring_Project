@@ -81,7 +81,7 @@
             <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project//introduce'/>">INTRODUCE</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project/introduce'/>">INTRODUCE</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MUSIC</a>
@@ -102,14 +102,9 @@
 			      <a class="dropdown-item music-tap" data-toggle="modal" href="#violeta-2">Violeta 교차편집</a>	
 			    </div>
 		      </div>
-		      
-		      <div class="dropdown dropright">            
-		        <a class="dropdown-item dropdown-toggle music-tap" data-toggle="dropdown" style="color:white;">BLOOM*IZ</a>
-			    <div class="dropdown-menu music-menu"> 
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#fiesta">Fiesta MV</a>
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#fiesta-2">Fiesta 교차편집</a>	
-			    </div>
-		      </div>
+		                
+		      <a class="dropdown-item" data-toggle="dropdown" style="color:white;">TEST</a>
+
 		      
 		      <div class="dropdown dropright">            
 		        <a class="dropdown-item dropdown-toggle music-tap" data-toggle="dropdown" style="color:white;">ONEIRIC DIARY</a>
@@ -129,12 +124,19 @@
 	            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">LOGIN</a>
 	          </li>
           </c:if>
-          <c:if test="${login != null}">
+		  <c:if test="${login != null}">
+		  		<li class="nav-item dropdown">
+            		<a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
+            		<div class="dropdown-menu music-menu">
+            			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">비밀번호 변경</a>
+            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">회원탈퇴</a>
+            		</div>
+            	</li>
           		<li class="nav-item">
 	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
-	        	 </li>
-	        	 <li class="nav-item">
-	            	<a class="nav-link js-scroll-trigger" href="#" >MYPAGE</a>
 	        	 </li>
           </c:if>
           
@@ -156,5 +158,5 @@
   </header>
 <%@ include file="../login.jsp" %>
 <%@ include file="../regist.jsp" %>  
-  
+
 

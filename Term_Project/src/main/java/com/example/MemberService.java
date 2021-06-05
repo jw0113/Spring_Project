@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,7 @@ public class MemberService {
 	}
 	
 	//해당 아이디의 모든 정보 가져오기
-//	public MemberVO selectOne(String id) {
-//		return dao.selectOne(id);
-//	}
+	public List<MemberVO> selectOne(String id) {
+		return dao.selectOne(id);
+	}
 }

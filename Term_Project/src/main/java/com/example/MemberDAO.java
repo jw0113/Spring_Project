@@ -1,6 +1,10 @@
 package com.example;
 
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,19 +47,27 @@ public class MemberDAO {
 	
 	//member정보 저장
 	public void insertMember(MemberVO vo) {
-		int re = jdbcTemplate.update("insert into `member` (id,pw,name,address,email,phone) values (?,?,?,?,?,(now()))", vo.getId(),vo.getPw(),vo.getName(),vo.getAddress(),vo.getEmail(),vo.getAddress());
+		int re = jdbcTemplate.update("insert into `member` (id,pw,name,address,email,phone,registrationdate) values (?,?,?,?,?,?,(now()))", vo.getId(),vo.getPw(),vo.getName(),vo.getAddress(),vo.getEmail(),vo.getPhone());
 		System.out.println("db 넣기 성공 " + re);
 		
 	}
 	
 	//해당 id의 모든 정보 가져오기
-//	public MemberVO selectOne(String id) {
-//		
-//		try {
-//			String re = jdbcTemplate.queryForObject("select * from `member` where id='"+id+"'", String.class);
-//			return true;
-//		}catch(EmptyResultDataAccessException e){
-//			return false;
-//		}
-//	}
+	public List<MemberVO> selectOne(String id) {
+			//String re = jdbcTemplate.queryForObject("select * from `member` where id='"+id+"'", String.class);
+
+		List<MemberVO> result = jdbcTemplate.query("select * from `member` where id='"+id+"'",
+				(ResultSet rs, int rowNum) -> {
+					MemberVO member = new MemberVO();
+					member.setId(rs.getString("id"));
+					member.setPw(rs.getString("pw"));
+					member.setName(rs.getString("name"));
+					member.setAddress(rs.getString("address"));
+					member.setEmail(rs.getString("email"));
+					member.setPhone(rs.getString("phone"));
+					member.setRegistrationdate(rs.getString("registrationdate"));
+					return member;
+				});
+		return result;
+	}
 }

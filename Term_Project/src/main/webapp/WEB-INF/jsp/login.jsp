@@ -78,6 +78,9 @@
 //start jQuery
 $(function() {
 //로그인 검증!
+
+	//입력값 중 하나라도 만족하지 못한다면 회원 가입 처리를 막기 위한 논리형 변수 선언.
+	let chk1 = false, chk2 = false
 	
 	//ID 입력값 검증.
 	$("#signInId").on("keyup", function() {

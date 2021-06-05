@@ -9,24 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@org.springframework.stereotype.Controller
-public class Controller {
+//@RestController :  Json 형태로 객체 데이터를 반환
+@RestController
+public class MemberController {
 
 	@Autowired
 	private MemberService service;
 	
-	//main 첫화면
-	@GetMapping("/")
-	public String main1() {
-		return "main";
-	}
-	
 	@PostMapping("/logincheck")
-	public String login_check(@RequestBody MemberVO vo) {
+	public String login_check(@RequestBody MemberVO vo, HttpSession session) {
 		String result = service.logincheck(vo.getId(),vo.getPw());
-		
+		if(result.equals("success")) session.setAttribute("login", vo.getId());
 		return result;
 	}
 	
@@ -43,12 +39,6 @@ public class Controller {
 			return "OK";
 		}	
 
-	}
-	
-	//회원가입 요청
-	@GetMapping("/regist")
-	public String resgist() {
-		return "regist";
 	}
 	
 	//회원가입 요청 처리
