@@ -81,44 +81,43 @@
             <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project/introduce'/>">INTRODUCE</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project/introduce'/>">NOTICE</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MUSIC</a>
-            <div class="dropdown-menu music-menu"> 
-            
-              <div class="dropdown dropright">            
-		        <a class="dropdown-item dropdown-toggle music-tap" data-toggle="dropdown" style="color:white;">COLOR*IZ</a>
-			    <div class="dropdown-menu music-menu"> 
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">La Vie En Rose MV</a>
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose-2">La Vie En Rose 교차편집</a>
-			    </div>
-		      </div>
-		      
-		      <div class="dropdown dropright">            
-		        <a class="dropdown-item dropdown-toggle music-tap" data-toggle="dropdown" style="color:white;">HEART*IZ</a>
-			    <div class="dropdown-menu music-menu"> 
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#violeta">Violeta MV</a>
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#violeta-2">Violeta 교차편집</a>	
-			    </div>
-		      </div>
-		                
-		      <a class="dropdown-item" data-toggle="dropdown" style="color:white;">TEST</a>
-
-		      
-		      <div class="dropdown dropright">            
-		        <a class="dropdown-item dropdown-toggle music-tap" data-toggle="dropdown" style="color:white;">ONEIRIC DIARY</a>
-			    <div class="dropdown-menu music-menu"> 
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#swan">환상동화 MV</a>
-			      <a class="dropdown-item music-tap" data-toggle="modal" href="#swan-2">환상동화 교차편집</a>	
-			    </div>
-		      </div>
-		      	   
-		    </div>
+          <c:if test="${login != null}">
+           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklis?id=${login}' />">BOARD</a>
           </li>
+          </c:if>
+          <c:if test="${login == null}">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/board/list' />">BOARD</a>
+            <a class="nav-link js-scroll-trigger" onclick="return confirm('로그인 먼저 해주세요!')">BOARD</a>
           </li>
+          </c:if>
+          <c:if test="${login != null}">
+          <li class="nav-item dropdown">
+            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
+            	<div class="dropdown-menu music-menu">
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">전체 도서 보기</a>
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />"></a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            	</div>
+          </li>
+          </c:if>
+          <c:if test="${login == null}">
+          <li class="nav-item dropdown">
+            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
+            	<div class="dropdown-menu music-menu">
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">전체 도서 보기</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')"></a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">도서 대출 내역</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">비밀번호 변경</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">회원탈퇴</a>
+            	</div>
+          </li>
+          </c:if>
+          
           <c:if test="${login == null}">
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">LOGIN</a>

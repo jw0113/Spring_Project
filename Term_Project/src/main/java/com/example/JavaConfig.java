@@ -24,4 +24,14 @@ public class JavaConfig {
 	public MemberDAO memberDao() {
 		return new MemberDAO(dataSource());
 	}
+	
+	@Bean
+	public BookDAO bookDao() {
+		return new BookDAO(dataSource());
+	}
+	
+	@Bean
+	public BookDetailDAO bookdetailDao() {
+		return new BookDetailDAO(dataSource());
+	}
 }
