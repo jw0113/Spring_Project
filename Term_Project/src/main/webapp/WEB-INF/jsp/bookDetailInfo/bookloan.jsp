@@ -35,7 +35,7 @@
 						
 						<tr>
 							<td style="text-align: left">
-								<p><strong>도서 이름 : </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
+								<p><strong>도서 이름  </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
 							</td>
 						</tr>
 						<tr>
@@ -47,7 +47,7 @@
 						
 						<tr>
 							<td style="text-align: left">
-								<p><strong>대출 날짜 : </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
+								<p><strong>대출 날짜  </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
 							</td>
 						</tr>
 						<tr>
@@ -59,7 +59,7 @@
 						
 						<tr>
 							<td style="text-align: left">
-								<p><strong>반납 날짜 : </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
+								<p><strong>반납 날짜  </strong>&nbsp;&nbsp;&nbsp;<span></span></p>
 							</td>
 						</tr>
 						<tr>
@@ -71,7 +71,7 @@
 						
 						<tr>
 							<td style="text-align: left">
-								<p><strong>비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;<span id="pwCheck"></span></p>
+								<p><strong>비밀번호를 입력해주세요</strong>&nbsp;&nbsp;&nbsp;<span id="ppppp"></span></p>
 							</td>
 						</tr>
 						<tr>
@@ -111,19 +111,20 @@ $(function() {
 
 	$('#book-loan').on('show.bs.modal', function (e) {
 	    id = $(e.relatedTarget).data('id');
+	    $("#memberid").val(id);
 	});
 
 	$('#book-loan').on('show.bs.modal', function (e) {
-	    id = $(e.relatedTarget).data('bookid');
+	    bookid = $(e.relatedTarget).data('bookid');
 	});
 
 	$('#book-loan').on('show.bs.modal', function (e) {
-	    id = $(e.relatedTarget).data('bookname');
+	    bookname = $(e.relatedTarget).data('bookname');
+	    $("#bookname").val(bookname);
 	});
 
-	console.log(id);
-	$("#memberid").val(id);
-	$("#bookname").val(bookname);
+	//$("#memberid").val(id);
+	//$("#bookname").val(bookname);
 	$("#loandate").val(date.getFullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0"+(date.getDate()+1)).slice(-2));
 	$("#returndate").val(returndate.getFullYear() + "-" + ("0"+(returndate.getMonth()+1)).slice(-2) + "-" + ("0"+(returndate.getDate()+1)).slice(-2));
 	
@@ -177,13 +178,17 @@ $(function() {
 	//도서대출 버튼을 눌렀을 때 이벤트
 	$("#loan-btn").click(function() {
 		if(chk1) {
+			console.log(bookid)
 			
 			const bookDetailInfo = {
 					bookid: bookid,
-					date: loandate,
-					returndate: returndate,
-					id : id  
+					loanDate: date,
+					returnDate: returndate,
+					memberid : id  
 			};
+
+			console.log(date);
+			console.log(returndate);
 			
 			$.ajax({
 				type: "POST",
@@ -193,8 +198,7 @@ $(function() {
 				},
 				dataType: "text",
 				data: JSON.stringify(bookDetailInfo),
-				success: function(data) {
-					console.log("result: " + data);
+				success: function(result) {
 					if(result === "Success") {
 						alert("도서 대출 되었습니다!");
 						location.href="/Term_Project/";

@@ -20,5 +20,15 @@ public class BookDetailService {
 	public int insertLoan(BookDetailVO vo) {
 		return dao.insertLoan(vo);
 	}
+	
+	//해당 회원의 대출 정보 보기
+	public List<BookDetailVO> selectmemberDetail(String id){
+		return dao.selectmemberDetail(id);
+	}
+	
+	//반납 처리하기
+	public int bookReturn(String id, String bookid) {
+		return dao.bookReturn(id,bookid);
+	}
 
 }

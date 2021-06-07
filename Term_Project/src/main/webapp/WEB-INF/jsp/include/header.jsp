@@ -97,7 +97,6 @@
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">도서 반납하기</a>
             		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">희망 도서 예약하기</a>
             		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">신규 도서 신청하기</a>
             	</div>
@@ -107,7 +106,6 @@
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">도서 반납하기</a>
             		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">희망 도서 예약하기</a>
             		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">신규 도서 신청하기</a>
             	</div>
@@ -125,7 +123,7 @@
             		<div class="dropdown-menu music-menu">
             			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
             			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
-            			<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
+            			<a class="dropdown-item music-tap" href="<c:url value='/bookDetailInfo/bookdetaillist?id=${login}' />">도서 대출 내역</a>
             			<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
             			<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
             		</div>

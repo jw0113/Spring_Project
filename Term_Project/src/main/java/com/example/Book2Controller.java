@@ -15,6 +15,7 @@ public class Book2Controller {
 	//도서 대출 요청 처리
 	@PostMapping("/bookDetail/bookloan")
 	public String bookLoan(@RequestBody BookDetailVO vo) {
+		System.out.println("vo확인 : " + vo);
 		int re = dservice.insertLoan(vo);
 		if(re == 0) return "Fail";
 		return "Success";

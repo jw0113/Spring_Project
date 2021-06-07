@@ -135,7 +135,7 @@ header.masthead {
        
        	  </c:if>
        	  <c:if test="${d.loanstate == 1}">
-		          <a class="btn form-control tooltipstered" onclick="return confirm('로그인 먼저 해주세요!')"
+		          <a class="btn form-control tooltipstered" onclick="return confirm('이미 대출된 도서입니다!')"
 		          style="margin-top: 0; height: 40px; color: white; background-color: orange; border: 0px solid #388E3C; opacity: 0.8"> 
 		          도서대출</a>
        
