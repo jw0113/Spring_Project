@@ -85,7 +85,7 @@
           </li>
           <c:if test="${login != null}">
            <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklis?id=${login}' />">BOARD</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklist?id=${login}' />">BOARD</a>
           </li>
           </c:if>
           <c:if test="${login == null}">
@@ -97,11 +97,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">전체 도서 보기</a>
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />"></a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">도서 반납하기</a>
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">희망 도서 예약하기</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">신규 도서 신청하기</a>
             	</div>
           </li>
           </c:if>
@@ -109,11 +107,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">전체 도서 보기</a>
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')"></a>
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">회원탈퇴</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">도서 반납하기</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">희망 도서 예약하기</a>
+            		<a class="dropdown-item music-tap" onclick="return confirm('로그인 먼저 해주세요!')">신규 도서 신청하기</a>
             	</div>
           </li>
           </c:if>

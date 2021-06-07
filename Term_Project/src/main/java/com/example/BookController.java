@@ -32,11 +32,25 @@ public class BookController {
 	
 	//해당 도서의 상세 정보 보기
 	@GetMapping("/bookInfo/bookcontent")
-	public String memberlist(Model model, @RequestParam(value="bookid", required=false) String bookid) {
+	public String memberlist(Model model, @RequestParam(value="bookid", required=false) String bookid, @RequestParam(value="memberid", required=false) String memberid) {
 		List<BookVO> list = service.getOneBookList(bookid);
+		List<BookDetailVO> dlist = dservice.selectOneDetail(bookid);
 		System.out.println("URL: bookInfo/bookcontent GET -> result: " + list);
+		System.out.println("URL: bookInfo/bookcontent GET -> result: " + dlist);
 		model.addAttribute("books",list);
+		model.addAttribute("bookdetail", dlist);
+		model.addAttribute("login", memberid);
 		return "bookInfo/bookcontent";
 	}
+	
+	//해당 도서의 대출 요청
+//	@GetMapping("bookDetailInfo/bookloan")
+//	public String bookloanlist(Model model, @RequestParam(value="bookid", required=false) String bookid, @RequestParam(value="memberid", required=false) String memberid) {
+//		List<BookVO> list = service.getOneBookList(bookid);
+//		model.addAttribute("books", list);
+//		model.addAttribute("login", memberid);
+//		
+//		return "bookDetailInfo/bookloan";
+//	}
 	
 }

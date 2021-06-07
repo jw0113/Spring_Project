@@ -30,4 +30,11 @@ public class BookDetailDAO {
 				});
 		return result;
 	}
+	
+	//대출 정보 추가하기
+	public int insertLoan(BookDetailVO vo) {
+		int re = jdbcTemplate.update("insert into `bookdetail` (bookid,loanstate,returnstate,loanDate,returnDate,memberid) values (?,True,False,?,?,?)", vo.getBookid(),vo.getLoanDate(),vo.getReturnDate(),vo.getMemberid());
+		System.out.println("db 넣기 성공 " + re);
+		return re;
+	}
 }

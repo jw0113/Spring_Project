@@ -42,6 +42,7 @@ public class BookDAO {
 					book.setBookname(rs.getString("bookname"));
 					book.setBookauthor(rs.getString("bookauthor"));
 					book.setBookpublic(rs.getString("bookpublic"));
+					book.setBookcontent(rs.getString("bookcontent"));
 					book.setRegistDate(rs.getTimestamp("registDate"));
 					return book;
 				});

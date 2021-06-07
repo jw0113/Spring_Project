@@ -42,13 +42,6 @@
 								style="ime-mode: inactive; margin-bottom: 25px; height: 40px; border: 1px solid #d9d9de"
 								placeholder="최소 8자"></td>
 						</tr>
-						<%--
-						<tr>
-							<td style="padding-top: 10px; text-align: center">
-								<p><strong>로그인</strong></p>
-							</td>
-						</tr>
-						--%>
 						<tr>
 							<td style="width: 100%; text-align: center; colspan: 2;"><input
 								type="button" value="로그인" class="btn form-control tooltipstered" id="signIn-btn"

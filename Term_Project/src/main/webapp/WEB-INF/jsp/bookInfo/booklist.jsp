@@ -154,7 +154,7 @@ header.masthead {
 							<tr style="color: #643691;">
 								<td>${b.booknum}</td>
 
-								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/bookInfo/bookcontent?bookid=${b.bookid}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page) }' />">
+								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/bookInfo/bookcontent?memberid=${login}&bookid=${b.bookid}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page) }' />">
 										${b.bookname}
 									</a>
 									&nbsp;

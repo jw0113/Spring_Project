@@ -64,7 +64,7 @@ header.masthead {
             <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklis?id=${login}' />">BOARD</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklist?id=${login}' />">BOARD</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
@@ -97,6 +97,7 @@ header.masthead {
   <div class="col-lg-12">
     <div class="card">
     <c:forEach var="b" items="${books}">
+    <c:forEach var="d" items="${bookdetail}">
       <div class="card-header text-white" style="background-color: #643691;">${b.bookname}</div>
       <div class="card-body">
 
@@ -115,24 +116,32 @@ header.masthead {
             <label>책 소개</label>
             <textarea class="form-control" rows="5" name='content' readonly>${b.bookcontent}</textarea>
           </div>
-
-        <form id="formObj" role="form" action="<c:url value='/board/delete' />" method="post">
-         
-         	<input type="hidden" name="boardNo" value="${article.boardNo}">
-         	<input type="hidden" name="page" value="${p.page}">
-         	<input type="hidden" name="countPerPage" value="${p.countPerPage}"> 
-         
-	          <input type="button" value="목록" class="btn" id="list-btn"
+          
+          <div class="form-group">
+            <label>대출 현황</label>
+            <c:if test="${d.loanstate == 0}">
+            	<span id="canloan"></span>
+            </c:if>
+            <c:if test="${d.loanstate == 1}">
+            	<span id="cannotloan"></span>
+            </c:if>
+          </div>
+          <input type="button" value="목록" class="btn" id="list-btn"
 			style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
-	          
-	          <c:if test="${login.name == article.writer}">
-	          
-		          <input type="button" value="대출하기" class="btn" id="modBtn"
-				style="background-color: orange; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+          <c:if test="${d.loanstate == 0}">
+		          <a class="btn form-control tooltipstered" data-toggle="modal" data-target="#book-loan" data-id="${login}" data-bookid="${b.bookid}" data-bookname="${b.bookname}"
+		          style="margin-top: 0; height: 40px; color: white; background-color: orange; border: 0px solid #388E3C; opacity: 0.8"> 
+		          도서대출</a>
        
-       			</c:if>
-        </form>
+       	  </c:if>
+       	  <c:if test="${d.loanstate == 1}">
+		          <a class="btn form-control tooltipstered" onclick="return confirm('로그인 먼저 해주세요!')"
+		          style="margin-top: 0; height: 40px; color: white; background-color: orange; border: 0px solid #388E3C; opacity: 0.8"> 
+		          도서대출</a>
+       
+       	  </c:if>
       </div>
+      </c:forEach>
       </c:forEach>
     </div>
   </div>
@@ -143,25 +152,20 @@ header.masthead {
 	
 	//제이쿼리의 시작.
 	$(function() {
+
+		$("#canloan").html('<b style="font-size:20px; color:green;">[대출 가능]</b>');
+		$("#cannotloan").html('<b style="font-size:20px; color:red;">[대출 불가능]</b>');
+
+		const bookid = $("#bookdetailid").val();
 		
 		//목록버튼 클릭 이벤트 처리.
 		$("#list-btn").click(function() {
 			console.log("목록 버튼이 클릭됨!");
-			location.href="/board/list?page=${p.page}&countPerPage=${p.countPerPage}&keyword=${p.keyword}&condition=${p.condition}";
+			location.href="/bookInfo/booklist?page=${p.page}&countPerPage=${p.countPerPage}&keyword=${p.keyword}&condition=${p.condition}";
 		}); //목록버튼 처리 끝.
 		
-		//변수는 let, 상수는 const로 선언. (ES6 -> 2015)
-		//const formElement = document.getElementById("formObj"); //vanilla js
-		const formElement = $("#formObj");
-		
-		//수정버튼 클릭 이벤트
-		$("#modBtn").click(function() {
-			console.log("수정 버튼이 클릭됨!");
-			formElement.attr("action", "/board/modify");
-			formElement.attr("method", "get");
-			formElement.submit();
-		});
 
 	}); //제이쿼리의 끝.
 	
 </script>
+<%@ include file="../bookDetailInfo/bookloan.jsp" %> 

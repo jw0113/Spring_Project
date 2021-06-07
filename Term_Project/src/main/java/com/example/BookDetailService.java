@@ -15,5 +15,10 @@ public class BookDetailService {
 	public List<BookDetailVO> selectOneDetail(String bookid){
 		return dao.selectOneDetail(bookid);
 	}
+	
+	//대출 정보 추가하기
+	public int insertLoan(BookDetailVO vo) {
+		return dao.insertLoan(vo);
+	}
 
 }
