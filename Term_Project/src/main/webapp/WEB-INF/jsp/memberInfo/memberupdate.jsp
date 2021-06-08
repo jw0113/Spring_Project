@@ -68,7 +68,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="/Term_Project/">
-      	<img class="img-fluid" src="<c:url value='resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
+      	<img class="img-fluid" src="<c:url value='../resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         메뉴
@@ -81,31 +81,35 @@
             <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
-            	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">회원탈퇴</a>
-            	</div>
-          </li>
+            		<a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
+            		<div class="dropdown-menu music-menu">
+            			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
+            			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
+            			<a class="dropdown-item music-tap" href="<c:url value='/bookDetailInfo/bookdetaillist?id=${login}' />">도서 대출 내역</a>
+            			<a class="dropdown-item music-tap" text-color="$fff" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
+            			<a class="dropdown-item music-tap" text-color="$fff" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            		</div>
+            	</li>
         </ul>
       </div>
     </div>
   </nav><br><br><br>
 
   <!-- Header -->
-	<header class="masthead">
-		<div class="container">
-				<h4 class="modal-title">
-					<span style="color: #643691;"></span> 나 의 개 인 정 보 수 정
-				</h4>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-2">
+			</div>
+			<div class="col-lg-8">
+				<div class="panel-body">
+				<h2 class="page-header"><span style="color: #643691;"></span> 도서 목록
+					
+				</h2>
 				
 				<form action="#" name="signupdate" id="signUpdateForm" method="post" style="margin-bottom: 0;">
 				<c:forEach var="member" items="${member}" varStatus="status">
 					<table
-						style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%">
+						style="cellpadding: 0; cellspacing: 0; margin: 0 auto; width: 100%" border="3" bordercolor="puple">
 						<tr>
 							<td style="text-align: left">
 								<p><strong>이름</strong>&nbsp;&nbsp;&nbsp;<span id="nameChk"></span></p>
@@ -181,7 +185,7 @@
 					</c:forEach>
 				</form>
 			</div>
-	</header>
+	</div></div></div>
 	<script>
 	
 		$(function() {

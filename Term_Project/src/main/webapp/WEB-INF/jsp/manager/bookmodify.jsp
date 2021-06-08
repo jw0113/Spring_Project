@@ -42,7 +42,46 @@ header.masthead {
 }	
 </style>
 </head>
+<body id="page-top">
 
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="/Term_Project/manager">
+      	<img class="img-fluid" src="<c:url value='../resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        메뉴
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/manager'/>">관리자 PAGE      HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project/introduce'/>">NOTICE</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/manager/books' />">BOARD</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
+            	<div class="dropdown-menu music-menu">
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">희망 도서 예약하기</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">신규 도서 신청하기</a>
+            	</div>
+          </li>
+          <c:if test="${login != null}">
+          		<li class="nav-item">
+	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
+	        	 </li>
+          </c:if>
+        </ul>
+      </div>
+    </div>
+  </nav><br><br><br>
 
 <br/><br/>
 <div class="container">
@@ -108,7 +147,7 @@ $(function() {
 		
 		const bookpublic = $("#bookpublic").val();
 		
-		const bookcontent = $("#bookcontent").val();
+		const bookcontent = $("textarea#bookcontent").val();
 		console.log(bookcontent);
 
 	

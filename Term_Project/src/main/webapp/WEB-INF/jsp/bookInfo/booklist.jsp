@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -131,11 +130,6 @@ header.masthead {
 			<div class="col-lg-8">
 				<div class="panel-body">
 				<h2 class="page-header"><span style="color: #643691;"></span> 도서 목록
-					<span id="count-per-page" style="float: right;">
-	                     <input class="btn btn-list" type="button" value="10">  
-	                     <input class="btn btn-list" type="button" value="20">   
-	                     <input class="btn btn-list" type="button" value="30">
-                     </span>
 					
 				</h2>
 					<table class="table table-bordered table-hover">
@@ -154,7 +148,7 @@ header.masthead {
 							<tr style="color: #643691;">
 								<td>${b.booknum}</td>
 
-								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/bookInfo/bookcontent?id=${login}&bookid=${b.bookid}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page) }' />">
+								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/bookInfo/bookcontent?id=${login}&bookid=${b.bookid}' />">
 										${b.bookname}
 									</a>
 									&nbsp;

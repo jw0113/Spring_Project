@@ -119,7 +119,7 @@ header.masthead {
 
           <div class="form-group">
             <label>책 소개</label>
-            <textarea class="form-control" rows="50" name='bookcontent'></textarea>
+            <textarea class="form-control" rows="10" name='bookcontent'></textarea>
           </div>
 
          <input type="submit" value="등록" class="btn form-control"

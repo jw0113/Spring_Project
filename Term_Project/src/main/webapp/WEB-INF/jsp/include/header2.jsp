@@ -78,7 +78,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/Term_Project/manager">관리자 PAGE      HOME</a>
+            <a class="nav-link js-scroll-trigger" href="/Term_Project/manager" >관리자 PAGE      HOME</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="<c:url value='/Term_Project/introduce'/>">NOTICE</a>
@@ -96,7 +96,7 @@
           
 		  <c:if test="${login != null}">
           		<li class="nav-item">
-	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
+	            	<a class="nav-link js-scroll-trigger" href="<c:url value='/logout' /> " onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
 	        	 </li>
           </c:if>
           

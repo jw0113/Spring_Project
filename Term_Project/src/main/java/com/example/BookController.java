@@ -69,7 +69,7 @@ public class BookController {
 		return "bookDetailInfo/bookdetaillist";
 	}
 	
-	//대여한 도서 목록 요청 처리
+	//대여한 도서 반납 요청 처리
 	@GetMapping("/bookDetailInfo/bookDetailReturn")
 	public String bookDetailReturn(@RequestParam(value="id", required=false) String id, @RequestParam(value="bookid", required=false) String bookid,RedirectAttributes ra) {
 		dservice.bookReturn(id,bookid);
@@ -151,7 +151,7 @@ public class BookController {
 	public String delete(String bookid, RedirectAttributes ra) {
 		service.delete(bookid);
 		System.out.println("delete 완료");
-		return "redirect: /manager/books";
+		return "redirect: /Term_Project/manager/books";
 	}
 	
 }

@@ -126,12 +126,12 @@ a {color: #fff}
             			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
             			<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
             			<a class="dropdown-item music-tap" href="<c:url value='/bookDetailInfo/bookdetaillist?id=${login}' />">도서 대출 내역</a>
-            			<a class="dropdown-item music-tap" text-color="" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            			<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            			<a class="dropdown-item music-tap" text-color="$fff" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
+            			<a class="dropdown-item music-tap" text-color="$fff" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
             		</div>
             	</li>
           		<li class="nav-item">
-	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
+	            	<a class="nav-link js-scroll-trigger" href="<c:url value='/logout' /> " onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
 	        	 </li>
           </c:if>
           
