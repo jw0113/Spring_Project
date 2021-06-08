@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -81,7 +80,7 @@ header.masthead {
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="/Term_Project/">
+      <a class="navbar-brand" href="/Term_Project/manager">
       	<img class="img-fluid" src="<c:url value='../resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -92,31 +91,19 @@ header.masthead {
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
+            <a class="nav-link js-scroll-trigger" href="/Term_Project/manager">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklis?id=${login}' />">BOARD</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/manager/books?id=${login}' />">BOARD</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">전체 도서 보기</a>
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />"></a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">희망 도서 예약하기</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">신규 도서 신청하기</a>
             	</div>
           </li>
-          <li class="nav-item dropdown">
-            	<a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
-            	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
-            	</div>
-           </li>
+
         </ul>
       </div>
     </div>
@@ -154,7 +141,7 @@ header.masthead {
 							<tr style="color: #643691;">
 								<td>${b.booknum}</td>
 
-								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/bookInfo/bookcontent?id=${login}&bookid=${b.bookid}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page) }' />">
+								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/manager/bookscontent?bookid=${b.bookid}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page) }' />">
 										${b.bookname}
 									</a>
 									&nbsp;
@@ -192,7 +179,7 @@ header.masthead {
 					    <!-- 다음 버튼 -->
 					    <c:if test="${pc.next}">
 						    <li class="page-item">
-						      <a class="page-link" href="<c:url value='/board/list${pc.makeURI(pc.endPage+1) }' />" 
+						      <a class="page-link" href="<c:url value='/manager/books${pc.makeURI(pc.endPage+1) }' />" 
 						      style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #f78f24; opacity: 0.8">다음</a>
 						    </li>
 					    </c:if>
@@ -216,15 +203,22 @@ header.masthead {
 	                            <span class="input-group-btn">
 	                                <input type="button" value="검색" class="btn btn-izone btn-flat" id="searchBtn">                                       
 	                            </span>
+	                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            <a href="<c:url value='/manager/bookwrite' />" class="btn btn-izone float-right">도서 추가</a>
 	                        </div>
 	                    </div>
 						<div class="col-sm-2"></div>
 					</div>
-					
-		
+
 	</div>
 	
 	<script>	
+
+		const result = "${msg}";
+		console.log(result);
+		if(result === "InsertSuccess") {
+			alert("도서 등록이 완료되었습니다.");
+		}
 		//start jQuery
 		$(function() {
 			
@@ -248,7 +242,7 @@ header.masthead {
 				const condition = $("#condition option:selected").val();
 				console.log("검색 조건: " +  condition);
 				
-				location.href="/Term_Project/bookInfo/search?keyword=" + keyword + "&condition=" + condition;
+				location.href="/Term_Project/manager/booksearch?keyword=" + keyword + "&condition=" + condition;
 			});
 			
 			//검색창에 엔터키 입력 시 이벤트 처리.

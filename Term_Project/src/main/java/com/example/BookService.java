@@ -34,4 +34,24 @@ public class BookService {
 	public List<BookVO> getOneBookList(String bookid){
 		return dao.getOneBookList(bookid);
 	}
+	
+	//도서 검색 처리
+	public List<BookVO> search(String keyword, String condition){
+		return dao.search(keyword,condition);
+	}
+	
+	//도서 추가 처리
+	public int bookwrite(BookVO vo, int booknum) {
+		return dao.bookwrite(vo,booknum);
+	}
+	
+	//도서 정보 수정
+	public int modify(BookVO vo) {
+		return dao.modify(vo);
+	}
+	
+	//도서 삭제 처리
+	public void delete(String bookid) {
+		dao.delete(bookid);
+	}
 }

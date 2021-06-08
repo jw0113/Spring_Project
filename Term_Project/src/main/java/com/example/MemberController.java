@@ -22,7 +22,10 @@ public class MemberController {
 	@PostMapping("/logincheck")
 	public String login_check(@RequestBody MemberVO vo, HttpSession session) {
 		String result = service.logincheck(vo.getId(),vo.getPw());
-		if(result.equals("success")) session.setAttribute("login", vo.getId());
+		if(result.equals("success")) {
+			session.setAttribute("login", vo.getId());
+			if(vo.getId().equals("manage")) result = "manager";
+		}
 		return result;
 	}
 	

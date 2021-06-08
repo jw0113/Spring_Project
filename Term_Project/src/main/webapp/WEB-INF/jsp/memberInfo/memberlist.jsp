@@ -68,7 +68,7 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="/Term_Project/">
-      	<img class="img-fluid" src="<c:url value='resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
+      	<img class="img-fluid" src="<c:url value='../resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         메뉴
@@ -98,10 +98,11 @@
   <!-- Header -->
 	<header class="masthead">
 		<div class="container">
+			<div class="modal-content">
 				<h4 class="modal-title">
 					<span style="color: #643691;"></span> 나 의 개 인 정 보
 				</h4>
-				
+			</div>
 				<form action="#" name="signup" id="signUpForm" style="margin-bottom: 0;">
 				<c:forEach var="member" items="${member}" varStatus="status">
 					<table

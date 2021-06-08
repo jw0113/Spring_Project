@@ -49,7 +49,7 @@ header.masthead {
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="/Term_Project/">
+      <a class="navbar-brand" href="/Term_Project/manager">
       	<img class="img-fluid" src="<c:url value='../resources/img/mark.png'/>" alt="" style="width:130px; height:70px;" />
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -60,31 +60,23 @@ header.masthead {
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/Term_Project/">HOME</a>
+            <a class="nav-link js-scroll-trigger" href="/Term_Project/manager">HOME</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value='/bookInfo/booklist?id=${login}' />">BOARD</a>
+            <a class="nav-link js-scroll-trigger" href="<c:url value='/manager/books?id=${login}' />">BOARD</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">BOOKService</a>
             	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">전체 도서 보기</a>
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />"></a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
+            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">희망 도서 예약하기</a>
+            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">신규 도서 신청하기</a>
             	</div>
           </li>
-          <li class="nav-item dropdown">
-            	<a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">MYPAGE</a>
-            	<div class="dropdown-menu music-menu">
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberlist?id=${login}' />">나의 정보 보기</a>
-            		<a class="dropdown-item music-tap" href="<c:url value='/memberInfo/memberupdate?id=${login}' />">나의 정보 수정하기</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">도서 대출 내역</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#pw-chk" data-id="${login}">비밀번호 변경</a>
-            		<a class="dropdown-item music-tap" data-toggle="modal" data-target="#login-delete" data-id="${login}">회원탈퇴</a>
-            	</div>
-           </li>
+          <c:if test="${login != null}">
+          		<li class="nav-item">
+	            	<a class="nav-link js-scroll-trigger" href="/user/logout" onclick="return confirm('진짜로 로그아웃 하시겠습니까?')" >LOGOUT</a>
+	        	 </li>
+          </c:if>
         </ul>
       </div>
     </div>
@@ -113,32 +105,26 @@ header.masthead {
 
           <div class="form-group">
             <label>책 소개</label>
-            <textarea class="form-control" rows="5" name='content' readonly>${b.bookcontent}</textarea>
+            <textarea class="form-control" rows="6" name='content' readonly>${b.bookcontent}</textarea>
           </div>
           
-          <div class="form-group">
-            <label>대출 현황</label>
-            <c:if test="${d.loanstate == 0}">
-            	<span id="canloan"></span>
-            </c:if>
-            <c:if test="${d.loanstate == 1}">
-            	<span id="cannotloan"></span>
-            </c:if>
-          </div>
-          <input type="button" value="목록" class="btn" id="list-btn"
+          <form id="formObj" role="form" action="<c:url value='/manager/bookdelete' />" method="post">
+         
+         	<input type="hidden" name="bookid" value="${b.bookid}">
+         	<input type="hidden" name="page" value="${p.page}">
+         	<input type="hidden" name="countPerPage" value="${p.countPerPage}"> 
+         
+	          <input type="button" value="목록" class="btn" id="list-btn"
 			style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
-          <c:if test="${d.loanstate == 0}">
-		          <a class="btn form-control tooltipstered" data-toggle="modal" data-target="#book-loan" data-id="${login}" data-bookid="${b.bookid}" data-bookname="${b.bookname}"
-		          style="margin-top: 0; height: 40px; color: white; background-color: orange; border: 0px solid #388E3C; opacity: 0.8"> 
-		          도서대출</a>
-       
-       	  </c:if>
-       	  <c:if test="${d.loanstate == 1}">
-		          <a class="btn form-control tooltipstered" onclick="return confirm('이미 대출된 도서입니다!')"
-		          style="margin-top: 0; height: 40px; color: white; background-color: orange; border: 0px solid #388E3C; opacity: 0.8"> 
-		          도서대출</a>
-       
-       	  </c:if>
+	          
+
+	          
+		      <input type="button" value="수정" class="btn" id="modBtn"
+				style="background-color: orange; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+		      <input type="submit" value="삭제" class="btn"  onclick="return confirm('정말로 삭제하시겠습니까?')"
+				style="background-color: red; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+
+        </form>
       </div>
       </c:forEach>
       </c:forEach>
@@ -148,23 +134,33 @@ header.masthead {
 </div>
 
 <script>
+
+	const message = "${msg}";
+	if(message === "modSuccess") {
+		alert("수정이 완료되었습니다.");
+	}
+
 	
 	//제이쿼리의 시작.
 	$(function() {
-
-		$("#canloan").html('<b style="font-size:20px; color:green;">[대출 가능]</b>');
-		$("#cannotloan").html('<b style="font-size:20px; color:red;">[대출 불가능]</b>');
-
-		const bookid = $("#bookdetailid").val();
 		
 		//목록버튼 클릭 이벤트 처리.
 		$("#list-btn").click(function() {
 			console.log("목록 버튼이 클릭됨!");
-			location.href="/bookInfo/booklist?page=${p.page}&countPerPage=${p.countPerPage}&keyword=${p.keyword}&condition=${p.condition}";
+			location.href="/manager/books?page=${p.page}&countPerPage=${p.countPerPage}&keyword=${p.keyword}&condition=${p.condition}";
 		}); //목록버튼 처리 끝.
 		
-
+		const formElement = $("#formObj");
+		
+		//수정버튼 클릭 이벤트
+		$("#modBtn").click(function() {
+			console.log("수정 버튼이 클릭됨!");
+			formElement.attr("action", "/Term_Project/manager/bookmodify");
+			formElement.attr("method", "get");
+			formElement.submit();
+		});
+		
+		
 	}); //제이쿼리의 끝.
 	
 </script>
-<%@ include file="../bookDetailInfo/bookloan.jsp" %> 

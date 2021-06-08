@@ -48,4 +48,39 @@ public class BookDAO {
 				});
 		return result;
 	}
+	
+	//도서 검색 요청 처리
+	public List<BookVO> search(String keyword, String condition){
+		List<BookVO> result = jdbcTemplate.query("select * from `book` where "+condition+"='"+keyword+"'",
+				(ResultSet rs, int rowNum) -> {
+					BookVO book = new BookVO();
+					book.setBooknum(rs.getInt("booknum"));
+					book.setBookid(rs.getString("bookid"));
+					book.setBookname(rs.getString("bookname"));
+					book.setBookauthor(rs.getString("bookauthor"));
+					book.setBookpublic(rs.getString("bookpublic"));
+					book.setBookcontent(rs.getString("bookcontent"));
+					book.setRegistDate(rs.getTimestamp("registDate"));
+					return book;
+				});
+		return result;
+	}
+	
+	//도서 추가 요청 처리
+	public int bookwrite(BookVO vo, int booknum) {
+		int re = jdbcTemplate.update("insert into `book` (booknum,bookid,bookname,bookauthor,bookpublic,bookcontent,registDate) values (?,?,?,?,?,?,(now()))", booknum,vo.getBookid(),vo.getBookname(),vo.getBookauthor(),vo.getBookpublic(),vo.getBookcontent());
+		System.out.println("db 넣기 성공 " + re);
+		return re;
+	}
+	
+	//도서 수정 요청 저리
+	public int modify(BookVO vo) {
+		int re = jdbcTemplate.update("update `book` set bookname=?, bookauthor=?, bookpublic=?, bookcontent=? where bookid=?",vo.getBookname(), vo.getBookauthor(), vo.getBookpublic(),vo.getBookcontent(),vo.getBookid());
+		return re;
+	}
+	
+	//도서 삭제 요청 처리
+	public void delete(String bookid) {
+		jdbcTemplate.update("delete from `book` where bookid='" + bookid + "'");
+	}
 }

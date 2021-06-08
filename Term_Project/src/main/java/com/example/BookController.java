@@ -32,6 +32,17 @@ public class BookController {
 		return "bookInfo/booklist";
 	}
 	
+	//도서 목록 불러오기(관리자 화면)
+	@GetMapping("manager/books")
+	public String managerlist(Model model) {
+		List<BookVO> list = service.getBookList();
+
+		System.out.println("URL: bookInfo/booklist GET -> result: " + list.size());
+		model.addAttribute("books", list);
+
+		return "manager/books";
+	}
+	
 	//해당 도서의 상세 정보 보기
 	@GetMapping("/bookInfo/bookcontent")
 	public String bokklist(Model model, @RequestParam(value="bookid", required=false) String bookid, @RequestParam(value="memberid", required=false) String memberid) {
@@ -65,6 +76,82 @@ public class BookController {
 		ra.addFlashAttribute("msg", "ReturnSuccess");
 		
 		return "redirect: /Term_Project/bookDetailInfo/bookdetaillist";
+	}
+	
+	//도서 검색 요청 처리
+	@GetMapping("/bookInfo/search")
+	public String bookSearch(Model model, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="condition", required=false) String condition) {
+		List<BookVO> list = service.search(keyword,condition);
+		model.addAttribute("books", list);
+		
+		return "bookInfo/booklist";
+	}
+	
+	//도서 검색 요청 처리 (관리자 화면)
+	@GetMapping("/manager/booksearch")
+	public String managerSearch(Model model, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="condition", required=false) String condition) {
+		List<BookVO> list = service.search(keyword,condition);
+		model.addAttribute("books", list);
+		
+		return "manager/booksearch";
+	}
+	
+	//도서 추가 요청
+	@GetMapping("/manager/bookwrite")
+	public String bookwrite() {
+		return "manager/bookwrite";
+	}
+	
+	//도서 추가 요청 처리
+	@PostMapping("/manager/bookwrite")
+	public String bookwrite(BookVO vo, RedirectAttributes ra) {
+		List<BookVO> list = service.getBookList();
+		int booknum = (list.size())+1;
+		int result = service.bookwrite(vo,booknum);
+		if(result==1) ra.addFlashAttribute("msg", "InsertSuccess");
+		return "redirect: /Term_Project/manager/books";
+	}
+	
+	//도서 수정 요청
+	@GetMapping("/manager/bookmodify")
+	public String modify(Model model, @RequestParam(value="bookid", required=false) String bookid) {
+		System.out.println("URL: /board/modify -> GET");
+		List<BookVO> list = service.getOneBookList(bookid);
+		System.out.println(list);
+		model.addAttribute("books", list);
+		return "manager/bookmodify";
+	}
+	
+//	//도서 수정 요청 처리
+//	@PostMapping("/manager/bookmodify")
+//	public String modify(BookVO vo, RedirectAttributes ra) {
+//		System.out.println("URL: /manager/bookmodify -> POST");
+//		service.modify(vo);
+//		System.out.println(vo);
+//		
+//		ra.addFlashAttribute("msg", "modSuccess");
+//		
+//		return "redirect: /Term_Project/manager/bookmodify";
+//	}
+	
+	//해당 도서의 상세 정보 보기 (관리자 화면)
+	@GetMapping("/manager/bookscontent")
+	public String booklist(Model model, @RequestParam(value="bookid", required=false) String bookid) {
+		List<BookVO> list = service.getOneBookList(bookid);
+		List<BookDetailVO> dlist = dservice.selectOneDetail(bookid);
+		System.out.println("URL: bookInfo/bookcontent GET -> result: " + list);
+		System.out.println("URL: bookInfo/bookcontent GET -> result: " + dlist);
+		model.addAttribute("books",list);
+		model.addAttribute("bookdetail", dlist);
+		return "manager/bookscontent";
+	}
+	
+	//도서 삭제 처리
+	@PostMapping("/manager/bookdelete")
+	public String delete(String bookid, RedirectAttributes ra) {
+		service.delete(bookid);
+		System.out.println("delete 완료");
+		return "redirect: /manager/books";
 	}
 	
 }

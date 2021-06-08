@@ -144,6 +144,9 @@ $(function() {
 							$("#signInPw").val("");
 							$("#signInPw").focus(); //커서를 이동시키고, 스크롤도 해당 위치로 이동시키는 메서드
 							chk2 = false;
+					} else if(data === "manager"){
+						//manager로 로그인할 경우
+						location.href="/Term_Project/manager/";
 					} else {
 						location.href="/Term_Project/";
 					}

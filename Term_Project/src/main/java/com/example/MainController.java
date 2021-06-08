@@ -23,6 +23,12 @@ public class MainController {
 		return "main";
 	}
 	
+	//관리자 화면
+	@GetMapping("/manager")
+	public String main2() {
+		return "main2";
+	}
+	
 	//회원가입 요청
 	@GetMapping("/regist")
 	public String resgist() {
